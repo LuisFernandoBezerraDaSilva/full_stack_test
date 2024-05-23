@@ -18,8 +18,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "dev": "set PORT=4000 && npm start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "env-cmd -f .env.test npx jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
