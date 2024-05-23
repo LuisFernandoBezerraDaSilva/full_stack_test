@@ -22,7 +22,7 @@ class Card extends Component<CardProps> {
                 <div className="card-header">
                     {header}
                 </div>
-                <div className="card-input">
+                <div className="card-body">
                     {body}
                 </div>
                 <div className="card-footer">
