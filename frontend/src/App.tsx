@@ -1,23 +1,39 @@
 import './App.css';
 import Card from './components/basis/card/Card';
 import ConfirmationFooter from './components/footers/confirmationFooter/ConfirmationFooter';
-import BodyMainCard from './components/bodies/bodyMainCard/BodyMainCard';
+import Header from './components/headers/header';
+import BodyMainCard from './components/main/bodyMainCard/BodyMainCard';
 import { useState } from 'react';
 
 
 function App() {
-  const [arquivoImportado, setArquivoImportado] = useState(false);
+  const [updatedFile, setUpdatedFile] = useState(false);
+  const [filterValue, setFilterValue] = useState('');
+  let file: File|null = null;
 
-  const handleFileSelected = (file: File) => {
-    // Faça algo com o arquivo aqui
-    setArquivoImportado(true);
+  const handleFileSelected = (incomingFile: File) => {
+    file = incomingFile;
   };
+
+  const handleButtonClick = () => {
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const fileContent = event.target?.result as string;
+            const lines = fileContent.split('\n');
+            const data = lines.map(line => line.split(','));
+            console.log(data);
+        };
+        reader.readAsText(file);
+        setUpdatedFile(true);
+    }
+  };  
 
   return (
     <Card
-      title="Input de CSV" 
-      body={<BodyMainCard arquivoImportado={arquivoImportado} onFileSelected={handleFileSelected} />} 
-      footer={<ConfirmationFooter />} 
+      header= {<Header filter={true} title="Input de CSV" onFilterChange={setFilterValue}/>}
+      body={<BodyMainCard updatedFile={updatedFile} onFileSelected={handleFileSelected} />} 
+      footer={<ConfirmationFooter onButtonClick={handleButtonClick}/>} 
       />
   );
 }

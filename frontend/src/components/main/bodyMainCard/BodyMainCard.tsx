@@ -4,18 +4,17 @@ import List from '../../basis/list/List';
 import { toast, ToastContainer } from 'react-toastify';
 
 interface CardProps {
-    arquivoImportado: boolean;
+    updatedFile: boolean;
     onFileSelected: (file: File) => void;
   }
 
 class BodyMainCard extends Component<CardProps> {
 
     render() {
-        let arquivoImportado = this.props.arquivoImportado;
+        let updatedFile = this.props.updatedFile;
         let onFileSelected = this.props.onFileSelected;
 
         const handleFileUpload = (event: any) => {
-          console.log('chegou aqui')
           const file = event.target.files[0];
           if (!file.name.endsWith('.csv')) {
               console.log('chegou aqui2')
@@ -26,17 +25,15 @@ class BodyMainCard extends Component<CardProps> {
           const reader = new FileReader();
           reader.onload = (e) => {
             const text = e.target?.result;
-            // console.log(text);
           };
           onFileSelected(file);
-          // reader.readAsText(file);
         };
 
           
         return (
             <div>
               <ToastContainer />
-              {!arquivoImportado ? (
+              {!updatedFile ? (
                 <div>
                     <span>Por favor, importe seu arquivo</span>
                     <input type='file' accept='.csv' onChange={handleFileUpload} />

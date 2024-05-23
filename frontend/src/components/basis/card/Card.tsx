@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Card.css';
 
 interface CardProps {
-    title: string;
+    header: JSX.Element;
     bgColor?: string;
     color?: string;
     body: JSX.Element;
@@ -11,7 +11,7 @@ interface CardProps {
 
 class Card extends Component<CardProps> {
     render() {
-        const title = this.props.title;
+        const header = this.props.header;
         const body = this.props.body;
         const footer = this.props.footer ? this.props.footer : null;
         const color = this.props.color ? this.props.color : "#000";
@@ -19,8 +19,8 @@ class Card extends Component<CardProps> {
 
         return (
             <div className="card" style={{backgroundColor: bgColor, color: color}}>
-                <div className="card-title">
-                    {title}
+                <div className="card-header">
+                    {header}
                 </div>
                 <div className="card-input">
                     {body}
