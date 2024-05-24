@@ -3,13 +3,29 @@ import Card from './components/basis/card/Card';
 import ConfirmationFooter from './components/footers/confirmationFooter/ConfirmationFooter';
 import Header from './components/headers/header';
 import BodyMainCard from './components/main/bodyMainCard/BodyMainCard';
-import { useState } from 'react';
-import uploadService from './services/file';
+import { useState,  useEffect } from 'react';
+import fileService from './services/file';
+import userService from './services/user';
 
 function App() {
   const [updatedFile, setUpdatedFile] = useState(false);
   const [filterValue, setFilterValue] = useState('');
   let file: File|null = null;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await userService.getAllFiles(); 
+        if(response.length !== 0) {
+          setUpdatedFile(true);
+        }
+      } catch (error) {
+        console.error(`Error while fetching data: ${error}`);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleFileSelected = (incomingFile: File) => {
     file = incomingFile;
@@ -23,8 +39,9 @@ function App() {
   const handleButtonClick = async () => {
     if (file) {
       try {
-        const response = await uploadService.uploadFile(file);
-        console.log(response.data);
+        const response = await fileService.uploadFile(file);
+        // console.log(response.data);
+        // TODO CONTINUAR ESSE CÓDIGO
         setUpdatedFile(true);
       } catch (error) {
         console.error(`Error while uploading file: ${error}`);
