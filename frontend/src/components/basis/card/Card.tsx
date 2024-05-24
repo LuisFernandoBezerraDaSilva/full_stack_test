@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Card.css';
 
-interface CardProps {
+interface Props {
     header: JSX.Element;
     bgColor?: string;
     color?: string;
@@ -9,7 +9,7 @@ interface CardProps {
     footer?: JSX.Element;
 }
 
-class Card extends Component<CardProps> {
+class Card extends Component<Props> {
     render() {
         const header = this.props.header;
         const body = this.props.body;

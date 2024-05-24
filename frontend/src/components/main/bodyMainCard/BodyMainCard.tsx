@@ -3,12 +3,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import List from '../../basis/list/List';
 import { toast, ToastContainer } from 'react-toastify';
 
-interface CardProps {
+interface Props {
     updatedFile: boolean;
     onFileSelected: (file: File) => void;
   }
 
-class BodyMainCard extends Component<CardProps> {
+class BodyMainCard extends Component<Props> {
 
     render() {
         let updatedFile = this.props.updatedFile;

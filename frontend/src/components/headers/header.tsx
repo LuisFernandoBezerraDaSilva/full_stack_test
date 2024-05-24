@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import "./header.css"
 
-interface CardProps {
+interface Props {
     filter: boolean;
     title: string;
     onFilterSubmit?: (value: string) => void;
 }
 
-class Header extends Component<CardProps> {
+class Header extends Component<Props> {
     state = {
         inputValue: ''
     };

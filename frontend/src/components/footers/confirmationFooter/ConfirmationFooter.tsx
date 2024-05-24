@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-interface CardProps {
+interface Props {
     onButtonClick: () => void;
 }
 
-class ConfirmationFooter extends Component<CardProps> {
+class ConfirmationFooter extends Component<Props> {
     render() {
         return (
             <div>
