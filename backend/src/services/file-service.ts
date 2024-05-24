@@ -1,17 +1,5 @@
 import sqlite3 from 'sqlite3';
-import User from "../models/user"
-const { Sequelize } = require('sequelize');
-
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: '../../../db/database.sqlite'
-});
-
-sequelize.authenticate()
-  .then(() => console.log('Conexion stablished successfully.'))
-  .catch((err: any) => console.error('Couldnt connect to the database:', err));
-
-module.exports = sequelize;
+import {User} from "../interfaces/user"
 
 let db = new sqlite3.Database('./db.sqlite', sqlite3.OPEN_READONLY, (err) => {
     if (err) {
@@ -35,6 +23,8 @@ export default {
 
     async create(params: User) {
         return new Promise((resolve, reject) => {
+            console.log('bbbbbbbbbbbbbbb')
+            console.log(params)
             const sql = `INSERT INTO users (name, city, country, favorite_sport) VALUES (?, ?, ?, ?)`;
             db.run(sql, [params.name, params.city, params.country, params.favorite_sport], function(err) {
             if (err) {
