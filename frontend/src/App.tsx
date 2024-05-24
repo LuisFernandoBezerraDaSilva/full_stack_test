@@ -4,6 +4,7 @@ import ConfirmationFooter from './components/footers/confirmationFooter/Confirma
 import Header from './components/headers/header';
 import BodyMainCard from './components/main/bodyMainCard/BodyMainCard';
 import { useState } from 'react';
+import uploadService from './services/file';
 
 function App() {
   const [updatedFile, setUpdatedFile] = useState(false);
@@ -19,25 +20,15 @@ function App() {
     
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const fileContent = event.target?.result as string;
-        const lines = fileContent.split('\n');
-        const headers = lines[0].split(',');
-        const data = lines.slice(1).map(line => {
-          const values = line.split(',');
-          let obj: Record<string, string> = {};
-          headers.forEach((header, index) => {
-            obj[header] = values[index];
-          });
-          return obj;
-        });
-        console.log(data);
-      };
-      reader.readAsText(file);
-      setUpdatedFile(true);
+      try {
+        const response = await uploadService.uploadFile(file);
+        console.log(response.data);
+        setUpdatedFile(true);
+      } catch (error) {
+        console.error(`Error while uploading file: ${error}`);
+      }
     }
   };
 

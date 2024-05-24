@@ -3,7 +3,6 @@ import controllers from "./controllers";
 import cors from "cors";
 import fs from "fs";
 import jobs from "./jobs";
-// import { hash } from './helpers/crypto';
 
 const argExecJobs = "--just-execute-the-jobs";
 
@@ -22,7 +21,7 @@ if (executeJobs) {
   server.use(express.urlencoded({ extended: true }));
   server.use(
     cors({
-      origin: process.env.URL_FRONT,
+      origin: '*',
       methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     }),
   );
@@ -45,7 +44,5 @@ if (executeJobs) {
   }
   server.use(express.static("public"));
 }
-
-// console.log('>>>>>', hash('Xplan1234')); Hash generation sample
 
 export default server;

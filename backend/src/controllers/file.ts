@@ -26,11 +26,9 @@ export default (app: Express) => {
                 await service.create(newOne);
               }
 
-              res.status(200).end();
+              res.status(200).json({ message: 'The file was uploaded successfully.', data: results });
             });
         } catch (err: any) {
-            console.log('chegou aqui!3')
-
           res
             .status(err.status || 500)
             .json(err)
