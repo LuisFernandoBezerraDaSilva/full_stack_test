@@ -8,14 +8,14 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './dev.sqlite3'
+      filename: './db.sqlite'
     }
   },
 
   staging: {
     client: 'sqlite3',
     connection: {
-      filename: './dev.sqlite3'
+      filename: './db.sqlite'
     },
     pool: {
       min: 2,
@@ -29,7 +29,7 @@ module.exports = {
   production: {
     client: 'sqlite3',
     connection: {
-      filename: './dev.sqlite3'
+      filename: './db.sqlite'
     },
     pool: {
       min: 2,

@@ -23,8 +23,6 @@ export default (app: Express) => {
             .on('data', (data) => results.push(data))
             .on('end', async () => {
               for (let newOne of results) {
-                console.log('aaaaaaaaaa')
-                console.log(newOne)
                 await service.create(newOne);
               }
 
