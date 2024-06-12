@@ -30,7 +30,12 @@ class Header extends Component<Props> {
                 <h1 className="h1-custom-margin">{title}</h1>
                 {filter && (
                     <div className="input-container">
-                        <input className="input-filter" type="text" onChange={this.handleInputChange} />
+                        <input 
+                            className="input-filter" 
+                            type="text"
+                            value={this.state.inputValue}
+                            onChange={this.handleInputChange}
+                        />
                         <button onClick={this.handleButtonClick}>Submit</button>
                     </div>
                 )}

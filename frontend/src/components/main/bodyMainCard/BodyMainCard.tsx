@@ -17,8 +17,6 @@ class BodyMainCard extends Component<Props> {
         const handleFileUpload = (event: any) => {
           const file = event.target.files[0];
           if (!file.name.endsWith('.csv')) {
-              console.log('chegou aqui2')
-
               toast.error('Por favor, selecione um arquivo CSV.');
               return;
           }

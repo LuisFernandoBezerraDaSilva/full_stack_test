@@ -7,6 +7,7 @@ interface Props {
     color?: string;
     body: JSX.Element;
     footer?: JSX.Element;
+    allFiles: any[]; 
 }
 
 class Card extends Component<Props> {
@@ -16,6 +17,7 @@ class Card extends Component<Props> {
         const footer = this.props.footer ? this.props.footer : null;
         const color = this.props.color ? this.props.color : "#000";
         const bgColor = this.props.bgColor ? this.props.bgColor : "#fff";
+        const allFiles = this.props.allFiles; 
 
         return (
             <div className="card" style={{backgroundColor: bgColor, color: color}}>

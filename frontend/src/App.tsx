@@ -10,12 +10,14 @@ import userService from './services/user';
 function App() {
   const [updatedFile, setUpdatedFile] = useState(false);
   const [filterValue, setFilterValue] = useState('');
+  const [allFiles, setAllFiles] = useState([]); 
   let file: File|null = null;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await userService.getAllFiles(); 
+        setAllFiles(response);
         if(response.length !== 0) {
           setUpdatedFile(true);
         }
@@ -31,17 +33,21 @@ function App() {
     file = incomingFile;
   };
 
-  const handleFilterSubmit = (value: string) => {
+  const handleFilterSubmit = async (value: string) => {
+    const response = await userService.getFilteredFiles(value);
+    if(response.length === 0) {
+      setUpdatedFile(false);
+    } else {
+      setUpdatedFile(true);
+    }
+
     setFilterValue(value);
-    
   };
 
   const handleButtonClick = async () => {
     if (file) {
       try {
         const response = await fileService.uploadFile(file);
-        // console.log(response.data);
-        // TODO CONTINUAR ESSE CÓDIGO
         setUpdatedFile(true);
       } catch (error) {
         console.error(`Error while uploading file: ${error}`);
@@ -55,6 +61,7 @@ function App() {
         header= {<Header filter={true && updatedFile} title="Input de CSV" onFilterSubmit={handleFilterSubmit}/>}
         body={<BodyMainCard updatedFile={updatedFile} onFileSelected={handleFileSelected} />} 
         footer={<ConfirmationFooter onButtonClick={handleButtonClick}/>} 
+        allFiles={allFiles} // Pass the response as a prop to Card
         />
     </div>
   );
